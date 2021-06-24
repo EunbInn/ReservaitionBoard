@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+section {
+	display: flex;
+	justify-content: center;
+	height: 100%;
+}
+
+button {
+	cursor: pointer;
+	padding: 15px 40px;
+	background-color: #FFFFFF;
+	border: 1px solid rgb(80, 80, 80);
+	color: rgb(80, 80, 80);
+	position: absolute;
+	left: 45%;
+	top: 45%;
+}
+
+button:hover {
+	background-color: rgb(80, 80, 80);
+	color: #FFFFFF;
+}
+
+img {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}

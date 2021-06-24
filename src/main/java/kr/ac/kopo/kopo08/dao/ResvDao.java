@@ -8,6 +8,7 @@ public interface ResvDao {
 	void create(Resv resv);
 	List<Resv> selectAll();
 	Resv selectOne(String date,int room);
+	Resv selectOne(String date, String name, String tel);
 	void update(Resv resv);
 	void delete(Resv resv);
 }

@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+#content-wrap {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+#header {
+	color: rgb(80, 80, 80);
+}
+
+table {
+	width: 800px;
+	border-top: 2px solid rgb(140, 140, 140);
+	border-bottom: 2px solid rgb(140, 140, 140);
+	border-collapse: collapse;
+}
+
+tr {
+	border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+th {
+	color: rgb(80, 80, 80);
+	padding: 10px 0px;
+	width: 200px;
+}
+
+td {
+	padding: 10px 0px;
+	color: rgb(80, 80, 80);
+	text-align: left;
+}
+
+#date {
+	padding: 0;
+	border: 1px solid rgb(200, 200, 200);
+	font-size: 17px;
+}
+
+#room {
+	padding: 0;
+	width: 15px;
+	border: none;
+	font-size: 17px;
+}
+
+
+
+#name, #tel {
+	width: 400px;
+	padding: 5px 0px;
+}
+
+#back {
+	border: 1px solid rgb(100, 100, 100);
+	padding: 7px 18px;
+	cursor: pointer;
+	color: rgb(100, 100, 100);
+	background-color: #FFFFFF;
+}
+
+#submit {
+	border: 1px solid rgb(100, 100, 100);
+	padding: 7px 18px;
+	cursor: pointer;
+	color: #FFFFFF;
+	background-color: rgb(100, 100, 100);
+}
+
+#submit:hover {
+	color: rgb(100, 100, 100);
+	background-color: #FFFFFF;
+}

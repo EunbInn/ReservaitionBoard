@@ -10,41 +10,7 @@
 <title>예약 페이지</title>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet" type="text/css" href="./navigation.css">
-<style>
-	#box {
-		width: 900px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
-
-	#content-wrap {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-contents: center;
-		text-align: center;
-		align-items: center;
-	}
-
-	#header {
-		color: rgb(80, 80, 80);
-	}
-	
-	table {
-		border: 1px solid rgb(120, 120, 120);
-		border-collapse: collapse;
-		width: 800px;
-	}	
-	
-	th {
-		color: rgb(80, 80, 80);
-	}
-	
-	.room {
-		width: 210px;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="./reservation.css">
 </head>
 <body>
 	<div id="box">
@@ -60,18 +26,21 @@
 		</div>
 		<section>
 			<div id="content-wrap">
-				<h1 id="header">Reservation</h1>
-				<hr>
 				<%
 				request.setCharacterEncoding("UTF-8");
 				String selectMonth = request.getParameter("month");
 				
 				ResvService resvService = ResvServiceImpl.getInstance();
 				List<GatherResv> monthReservation = resvService.monthReservation(selectMonth);
+				String currentMonth = resvService.currentMonth();
+				
+				if (selectMonth == null) selectMonth = currentMonth;
 				%>
+				<br>
+				<h1 id="header">Reservation</h1>
 				<form method="POST">
-					<input type="month" id="month" name="month">
-					<button formaction="./reservation.jsp">조회</button>
+					<input type="month" id="month" name="month" min="<%=currentMonth %>" value="<%=selectMonth%>">
+					<button id="submit" formaction="./reservation.jsp">조회</button>
 				</form>
 				<br>
 				<table border="1px solid rgb(120, 120, 120)">
@@ -88,39 +57,48 @@
 						<c:set var="room3" value="${resvList.room3}" />
 						<tr>
 							<td><c:out value="${resvList.date}" /></td>
-							<td>
+							
 							<c:choose>
-								<c:when test="${room1.name eq '예약가능'}" >
-									<a href="./reservPage.jsp?date=${resvList.date}&room=1" class=""><c:out value="${room1.name}" /></a>
+								<c:when test="${room1.name=='예약가능'}" >
+								<td class="available">
+									<a href="./reservPage.jsp?date=${resvList.date}&room=1"><i class="fas fa-unlock"></i> <c:out value="${room1.name}" /></a>
+								</td>
 								</c:when>
 								<c:otherwise>
-									<a href="./reservView.jsp?date=${resvList.date}&room=1" disable><c:out value="${room1.name}" /></a>
+								<td class="notAvailable">
+									<a><i class="fas fa-lock"></i> <c:out value="예약불가" /></a>
+								</td>
 								</c:otherwise>
 							</c:choose>
-							</td>
-							<td>
 							<c:choose>
-								<c:when test="${room2.name eq '예약가능'}" >
-									<a href="./reservPage.jsp?date=${resvList.date}&room=2"><c:out value="${room2.name}" /></a>
+								<c:when test="${room2.name=='예약가능'}" >
+								<td class="available">
+									<a href="./reservPage.jsp?date=${resvList.date}&room=2"><i class="fas fa-unlock"></i> <c:out value="${room2.name}" /></a>
+								</td>
 								</c:when>
 								<c:otherwise>
-									<a href="./reservView.jsp?date=${resvList.date}&room=2" disable><c:out value="${room2.name}" /></a>
+								<td class="notAvailable">
+									<a><i class="fas fa-lock"></i> <c:out value="예약불가" /></a>
+								</td>
 								</c:otherwise>
 							</c:choose>
-							</td>
-							<td>
 							<c:choose>
-								<c:when test="${room3.name eq '예약가능'}" >
-									<a href="./reservPage.jsp?date=${resvList.date}&room=3"><c:out value="${room3.name}" /></a>
+								<c:when test="${room3.name=='예약가능'}" >
+								<td class="available">
+									<a href="./reservPage.jsp?date=${resvList.date}&room=3"><i class="fas fa-unlock"></i> <c:out value="${room3.name}" /></a>
+								</td>
 								</c:when>
 								<c:otherwise>
-									<a href="./reservView.jsp?date=${resvList.date}&room=3" disable><c:out value="${room3.name}" /></a>
+								<td class="notAvailable">
+									<a><i class="fas fa-lock"></i> <c:out value="예약불가" /></a>
+								</td>
 								</c:otherwise>
 							</c:choose>
-							</td>
 						</tr>
 					</c:forEach>
 				</table>
+				<br>
+				<button id="confirmReservation" onclick="location.href='resvConfirm.html'">예약 조회</button>
 			</div>
 		</section>
 	</div>

@@ -34,8 +34,8 @@ public class ResvServiceImpl implements ResvService{
 
 	@Override
 	public Resv selectOne(String date, int room) {
-		Resv board = resvDao.selectOne(date, room);
-		return board;
+		
+		return resvDao.selectOne(date, room);
 	}
 
 	@Override
@@ -55,19 +55,16 @@ public class ResvServiceImpl implements ResvService{
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-		if (selectMonth != null) {
+		if (selectMonth != null && !sdf.format(cal.getTime()).contains(selectMonth)) {
 			int year = Integer.parseInt(selectMonth.split("-")[0]);
 			int month = Integer.parseInt(selectMonth.split("-")[1]);
 			cal.set(year, (month - 1), 1); //첫날로 셋팅
-		} else if (selectMonth == null){
-			cal.clear();
 		}
-		
-		//System.out.println(lastDayOfMonth);
+	
 		int lastDayOfMonth = cal.getActualMaximum(5); // 5번이 month에 해당하는 필드번호
-		for (int i = 1; i <= lastDayOfMonth; i++) {
+		for (int i = cal.get(cal.DATE); i <= lastDayOfMonth; i++) {
 			String date = sdf.format(cal.getTime());
-			//System.out.println(date);
+			
 			GatherResv gResv = gatherResv(date);
 			resvList.add(gResv);
 			cal.add(cal.DAY_OF_MONTH, +1);
@@ -85,19 +82,35 @@ public class ResvServiceImpl implements ResvService{
 		Resv resv2 = resvDao.selectOne(date, 2);
 		Resv resv3 = resvDao.selectOne(date, 3);
 		if (resv1.getName() == null) {
-			resv1.setName("예약 가능");
+			resv1.setName("예약가능");
 		}
 		if (resv2.getName() == null) {
-			resv2.setName("예약 가능");
+			resv2.setName("예약가능");
 		}
 		if (resv3.getName() == null) {
-			resv3.setName("예약 가능");
+			resv3.setName("예약가능");
 		}
 		gResv.setRoom1(resv1);
 		gResv.setRoom2(resv2);
 		gResv.setRoom3(resv3);
 		
 		return gResv;
+	}
+	
+	@Override
+	public String currentMonth() {
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		String currentMonth = "";
+		
+		currentMonth = sdf.format(cal.getTime());
+	
+		return currentMonth;
+	}
+
+	@Override
+	public Resv selectOne(String date, String name, String tel) {
+		return resvDao.selectOne(date, name, tel);
 	}
 
 }

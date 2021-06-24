@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+#box {
+	width: 900px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#content-wrap {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-contents: center;
+	text-align: center;
+	align-items: center;
+}
+
+#header {
+	color: rgb(80, 80, 80);
+}
+
+table {
+	border: 1px solid rgb(140, 140, 140);
+	border-collapse: collapse;
+	width: 800px;
+}
+
+th {
+	color: rgb(80, 80, 80);
+}
+
+.room {
+	width: 210px;
+}
+
+.available {
+	padding: 10px 0px;
+}
+
+.available a {
+	text-decoration: none;
+	color: rgb(80, 80, 80);
+}
+
+.notAvailable {
+	background-color: rgb(140, 140, 140);
+	padding: 10px 0px;
+	color: white;
+}
+
+#month {
+	text-align: center;
+	padding: 5px 0px;
+	border: 1px solid rgb(140, 140, 140);
+}
+
+#submit {
+	padding: 6px 7px;
+	cursor: pointer;
+	border: 1px solid rgb(140, 140, 140);
+	color: #FFFFFF;
+	background-color: rgb(140, 140, 140);
+}
+
+#submit:hover {
+	color: rgb(80, 80, 80);
+	background-color: #FFFFFF;
+}
+
+#confirmReservation {
+	padding: 7px 15px;
+	cursor: pointer;
+	border: 1px solid rgb(140, 140, 140);
+	color: #FFFFFF;
+	background-color: rgb(140, 140, 140);
+}
+
+#confirmReservation:hover {
+	color: rgb(80, 80, 80);
+	background-color: #FFFFFF;
+}

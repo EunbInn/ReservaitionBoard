@@ -100,7 +100,9 @@ public class ResvDaoImpl implements ResvDao{
 				resv.setAddr(rs.getString(4));
 				resv.setTel(rs.getString(5));
 				resv.setInName(rs.getString(6));
-				resv.setComment(rs.getString(7));
+				resv.setComment(rs.getString(7).replaceAll("/r/n", "<br>")
+								.replaceAll("<", "&lt;")
+								.replaceAll(">", "&gt;"));
 				resv.setWriteDate(rs.getString(8));
 				resv.setProcess(rs.getInt(9));
 			}
@@ -149,6 +151,40 @@ public class ResvDaoImpl implements ResvDao{
 			String err = e.getMessage();
 			System.out.println(err);
 		} finally {}
+	}
+
+	@Override
+	public Resv selectOne(String date, String name, String tel) {
+		Resv resv = new Resv();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver"); 
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/myDB", ConstValue.id, ConstValue.pw);
+			Statement stmt = con.createStatement();
+			ResultSet rs = null;
+			
+			String query = "select * from resv where resv_date='" + date +"' and name='" + name + "' and tel='" + tel + "';";
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				resv.setName(rs.getString(1));
+				resv.setDate(rs.getString(2));
+				resv.setRoom(rs.getInt(3));
+				resv.setAddr(rs.getString(4));
+				resv.setTel(rs.getString(5));
+				resv.setInName(rs.getString(6));
+				resv.setComment(rs.getString(7).replaceAll("/r/n", "<br>")
+								.replaceAll("<", "&lt;")
+								.replaceAll(">", "&gt;"));
+				resv.setWriteDate(rs.getString(8));
+				resv.setProcess(rs.getInt(9));
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (Exception e) {
+			String err = e.getMessage();
+			System.out.println(err);
+		} finally {}
+		return resv;
 	}
 
 }
